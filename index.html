@@ -5,18 +5,19 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Remote Soundboard</title>
+	<link rel="stylesheet" href="./style.css">
 </head>
 
 <body>
 	<h1>Remote Soundboard</h1>
 
 	<ul class="sounds">
-		<li><button data-sound="joke">Dad Joke</button></li>
-		<li><button data-sound="cheer">Small Cheer</button></li>
-		<li><button data-sound="cheer_big">Big Cheer</button></li>
-		<li><button data-sound="fail">Fail</button></li>
-		<li><button data-sound="laugh">Laugh</button></li>
-		<li><button data-sound="crickets">Crickets</button></li>
+		<li><button data-sound="joke">Dad Joke 🥁</button></li>
+		<li><button data-sound="cheer">Small Cheer 👏</button></li>
+		<li><button data-sound="cheer_big">Big Cheer 🥳🎉</button></li>
+		<li><button data-sound="fail">Fail 👎</button></li>
+		<li><button data-sound="laugh">Laugh 🤣</button></li>
+		<li><button data-sound="crickets">Crickets 🦗</button></li>
 	</ul>
 
 	<audio data-sound="joke" src="/sounds/joke.mp3" type="audio/mpeg"></audio>
@@ -27,40 +28,7 @@
 	<audio data-sound="crickets" src="./sounds/crickets.mp3" type="audio/mpeg"></audio>
 
 	<script src="https://media.twiliocdn.com/sdk/js/sync/releases/0.11.4/twilio-sync.min.js"></script>
-
-	<script>
-		fetch('https://corn-oyster-5571.twil.io/sync-token').then(result => {
-			result.json().then(data => {
-				const client = new Twilio.Sync.Client(data.token)
-
-				client.document('sound').then(doc => {
-					doc.on('updated', e => {
-						const sound = e.value.sound
-
-						const audioContext = new AudioContext(),
-							audio = document.querySelector(`audio[data-sound="${sound}"]`),
-							track = audioContext.createMediaElementSource(audio)
-
-						track.connect(audioContext.destination)
-
-						audio.play()
-					})
-				})
-			})
-		})
-
-		document.querySelectorAll('.sounds button').forEach(btn => {
-			btn.addEventListener('click', e => {
-				fetch('/sync', {
-					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json'
-					},
-					body: JSON.stringify({ sound: e.target.dataset.sound })
-				})
-			})
-		})
-	</script>
+	<script src="main.js"></script>
 
 </body>
 

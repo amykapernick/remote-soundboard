@@ -8,6 +8,9 @@ syncSid = process.env.TWILIO_SYNC_SERVICE_SID
 
 app.use(bodyParser.json())
 app.use('/sounds', express.static('sounds'))
+app.use(express.static('css'))
+app.use(express.static('js'))
+
 
 app.get('/', (req, res) => {	
 	res.sendFile('./index.html', { root: __dirname })
