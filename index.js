@@ -6,6 +6,10 @@ const express = require('express'),
 	Twilio = require('twilio'),
 syncSid = process.env.TWILIO_SYNC_SERVICE_SID
 
+const AccessToken = require('twilio').jwt.AccessToken,
+SyncGrant = AccessToken.SyncGrant;
+
+
 app.use(bodyParser.json())
 app.use('/sounds', express.static('sounds'))
 app.use(express.static('css'))
@@ -32,6 +36,27 @@ app.post('/sync', (req, res) => {
 	})
 
 	res.end()
+})
+
+app.get('/sync-token', (req, res) => {
+    const identity = 'only for testing';
+
+    const syncGrant = new SyncGrant({
+        serviceSid: process.env.TWILIO_SYNC_SERVICE_SID,
+	}),
+	token = new AccessToken(
+        process.env.TWILIO_ACCOUNT_SID,
+        process.env.TWILIO_API_KEY,
+        process.env.TWILIO_API_SECRET
+	);
+	
+    token.addGrant(syncGrant);
+    token.identity = identity;
+
+	res.send({
+        identity: identity,
+        token: token.toJwt()
+    });
 })
 
 

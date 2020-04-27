@@ -1,4 +1,4 @@
-fetch('https://corn-oyster-5571.twil.io/sync-token').then(result => {
+fetch('/sync-token').then(result => {
 	result.json().then(data => {
 		const client = new Twilio.Sync.Client(data.token)
 
