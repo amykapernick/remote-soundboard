@@ -7,6 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "Amy Kapernick <amy@aimhigherweb.design> (https://amyskapers.dev)",
-  "license": "MIT"
+  "author": "Amy Kapernick <amy@amyskapers.dev> (https://amyskapers.dev)",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
