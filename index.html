@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Remote Soundboard</title>
+</head>
+
+<body>
+	<h1>Remote Soundboard</h1>
+
+	<p class="sound"></p>
+
+	<ul class="sounds">
+		<li><button data-sound="joke">Dad Joke</button></li>
+		<li><button data-sound="cheer">Small Cheer</button></li>
+		<li><button data-sound="cheer_big">Big Cheer</button></li>
+		<li><button data-sound="fail">Fail</button></li>
+		<li><button data-sound="laugh">Laugh</button></li>
+		<li><button data-sound="crickets">Crickets</button></li>
+	</ul>
+
+	<script src="https://media.twiliocdn.com/sdk/js/sync/releases/0.11.4/twilio-sync.min.js"></script>
+
+	<script>
+		fetch('https://corn-oyster-5571.twil.io/sync-token').then(result => {
+			result.json().then(data => {
+				const client = new Twilio.Sync.Client(data.token)
+
+				client.document('sound').then(doc => {
+					doc.on('updated', e => {
+						document.querySelector('.sound').innerHTML = e.value.sound
+					})
+				})
+			})
+		})
+
+		document.querySelectorAll('.sounds button').forEach(btn => {
+			btn.addEventListener('click', e => {
+				console.log(e.target.dataset.sound)
+				fetch('/sync', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify({ sound: e.target.dataset.sound })
+				})
+			})
+		})
+	</script>
+
+</body>
+
+</html>
