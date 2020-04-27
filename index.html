@@ -10,8 +10,6 @@
 <body>
 	<h1>Remote Soundboard</h1>
 
-	<p class="sound"></p>
-
 	<ul class="sounds">
 		<li><button data-sound="joke">Dad Joke</button></li>
 		<li><button data-sound="cheer">Small Cheer</button></li>
@@ -20,6 +18,13 @@
 		<li><button data-sound="laugh">Laugh</button></li>
 		<li><button data-sound="crickets">Crickets</button></li>
 	</ul>
+
+	<audio data-sound="joke" src="/sounds/joke.mp3" type="audio/mpeg"></audio>
+	<audio data-sound="laugh" src="/sounds/laughing.mp3" type="audio/mpeg"></audio>
+	<audio data-sound="cheer_big" src="/sounds/big_cheer.mp3" type="audio/mpeg"></audio>
+	<audio data-sound="cheer" src="./sounds/cheer.mp3" type="audio/mpeg"></audio>
+	<audio data-sound="fail" src="./sounds/fail.mp3" type="audio/mpeg"></audio>
+	<audio data-sound="crickets" src="./sounds/crickets.mp3" type="audio/mpeg"></audio>
 
 	<script src="https://media.twiliocdn.com/sdk/js/sync/releases/0.11.4/twilio-sync.min.js"></script>
 
@@ -30,7 +35,15 @@
 
 				client.document('sound').then(doc => {
 					doc.on('updated', e => {
-						document.querySelector('.sound').innerHTML = e.value.sound
+						const sound = e.value.sound
+
+						const audioContext = new AudioContext(),
+							audio = document.querySelector(`audio[data-sound="${sound}"]`),
+							track = audioContext.createMediaElementSource(audio)
+
+						track.connect(audioContext.destination)
+
+						audio.play()
 					})
 				})
 			})
@@ -38,7 +51,6 @@
 
 		document.querySelectorAll('.sounds button').forEach(btn => {
 			btn.addEventListener('click', e => {
-				console.log(e.target.dataset.sound)
 				fetch('/sync', {
 					method: 'POST',
 					headers: {
