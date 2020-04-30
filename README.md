@@ -13,6 +13,6 @@ A soundboard for use in remote presentations, that allows remote attendees to re
 
 
 ## Env Variables
-`TWILIO_ACCOUNT_SID` - Account SID, found in Twilio Console
-`TWILIO_API_KEY` & `TWILIO_API_SECRET` - Generate API key and API secret [here in Twilio Console](https://www.twilio.com/console/project/api-keys)
-`TWILIO_SYNC_SERVICE_SID` - Get the default service SID, or create a new service [here in the [Twilio Console]()
+- `TWILIO_ACCOUNT_SID` - Account SID, found in Twilio Console
+- `TWILIO_API_KEY` & `TWILIO_API_SECRET` - Generate API key and API secret [here in Twilio Console](https://www.twilio.com/console/project/api-keys)
+- `TWILIO_SYNC_SERVICE_SID` - Get the default service SID, or create a new service [here in the [Twilio Console]()
