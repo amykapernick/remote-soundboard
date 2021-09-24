@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Remote Soundboard</title>
+</head>
+
+<body>
+	<h1>Remote Soundboard</h1>
+
+	<ul id="sounds">
+		<li>
+			<button data-sound="joke">Dad Joke 🥁</button>
+		</li>
+		<li>
+			<button data-sound="cheer">Small Cheer 👏</button>
+		</li>
+		<li>
+			<button data-sound="cheer_big">Big Cheer 🥳</button>
+		</li>
+		<li>
+			<button data-sound="facepalm">Whoops 🤦‍♀️</button>
+		</li>
+		<li>
+			<button data-sound="laugh">Laugh 😂</button>
+		</li>
+	</ul>
+
+	<audio data-sound="joke" src="/sounds/joke.mp3" type="audio/mpeg"></audio>
+	<audio data-sound="laugh" src="/sounds/laughing.mp3" type="audio/mpeg"></audio>
+	<audio data-sound="cheer_big" src="/sounds/big_cheer.mp3" type="audio/mpeg"></audio>
+	<audio data-sound="cheer" src="/sounds/cheer.mp3" type="audio/mpeg"></audio>
+	<audio data-sound="facepalm" src="/sounds/facepalm.mp3" type="audio/mpeg"></audio>
+
+	<script src="/js/main.js"></script>
+</body>
+
+</html>

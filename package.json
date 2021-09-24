@@ -1,20 +1,24 @@
 {
   "name": "remote-soundboard",
   "version": "1.0.0",
-  "description": "",
+  "description": "A soundboard that can be used by the audience in a remote talk, to provide audio feedback (cheers and laughter) to the speaker",
   "main": "index.js",
   "scripts": {
+    "start": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/amykapernick/remote-soundboard.git"
   },
-  "keywords": [],
   "author": "Amy Kapernick <amy@kapers.dev> (https://amyskapers.dev/)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/amykapernick/remote-soundboard/issues"
   },
-  "homepage": "https://github.com/amykapernick/remote-soundboard#readme"
+  "homepage": "https://github.com/amykapernick/remote-soundboard#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "nodemon": "^2.0.7"
+  }
 }
